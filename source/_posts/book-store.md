@@ -23,4 +23,5 @@ tags: 创意
 
 3. 功能分析
 
+![电子书橱](http://kaifa.wy.cn:500/Picture/Show/f3ca13d1-7faf-4759-b585-34fdafb0a98c)
 

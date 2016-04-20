@@ -69,5 +69,7 @@ theme: wixo                        ## 当前主题名称
 
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
-deploy:                                 ##部署
-  type:
+deploy:
+  type: git
+  repository: http://github.com/pming1/pming1.github.io.git
+  branch: master
