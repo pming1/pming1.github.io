@@ -3,11 +3,12 @@ title: multer
 description: Middleware for handling <code>multipart/form-data</code>.
 author: Feynman
 date: 2016-04-27 17:26:54
-categories: nodejs upload multer
+categories: nodejs
 tags: nodejs upload multer
 ---
 
 ### 中间件名称：multer
+### 用途：Middleware for handling <code>multipart/form-data</code>.
 ### 源码地址：[github/multer](https://github.com/expressjs/multer)
 
 ----
