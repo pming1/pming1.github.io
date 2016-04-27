@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>FeynmanBlog</title>
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://blog.printf.me/"/>
+  <updated>2016-04-27T09:50:26.362Z</updated>
+  <id>http://blog.printf.me/</id>
+  
+  <author>
+    <name>Feynman</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>multer</title>
+    <link href="http://blog.printf.me/2016/04/27/multer/"/>
+    <id>http://blog.printf.me/2016/04/27/multer/</id>
+    <published>2016-04-27T09:26:54.000Z</published>
+    <updated>2016-04-27T09:50:26.362Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;中间件名称：multer&quot;&gt;&lt;a href=&quot;#中间件名称：multer&quot; class=&quot;headerlink&quot; title=&quot;中间件名称：multer&quot;&gt;&lt;/a&gt;中间件名称：multer&lt;/h3&gt;&lt;h3 id=&quot;源码地址：github-multer&quot;&gt;&lt;a href=&quot;#源码地址：github-multer&quot; class=&quot;headerlink&quot; title=&quot;源码地址：github/multer&quot;&gt;&lt;/a&gt;源码地址：&lt;a href=&quot;https://github.com/expressjs/multer&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;github/multer&lt;/a&gt;&lt;/h3&gt;&lt;hr&gt;
+&lt;h1 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; class=&quot;headerlink&quot; title=&quot;安装&quot;&gt;&lt;/a&gt;安装&lt;/h1&gt;&lt;p&gt;&lt;code&gt;npm install --save multer&lt;/code&gt;&lt;/p&gt;
+&lt;h1 id=&quot;使用说明&quot;&gt;&lt;a href=&quot;#使用说明&quot; class=&quot;headerlink&quot; title=&quot;使用说明&quot;&gt;&lt;/a&gt;使用说明&lt;/h1&gt;&lt;p&gt;Multer adds a body object and a file or files object to the request object. The body object contains the values of the text fields of the form, the file or files object contains the files uploaded via the form.&lt;/p&gt;
+&lt;h2 id=&quot;简单例子：&quot;&gt;&lt;a href=&quot;#简单例子：&quot; class=&quot;headerlink&quot; title=&quot;简单例子：&quot;&gt;&lt;/a&gt;简单例子：&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;var express = require(&amp;apos;express&amp;apos;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;var multer  = require(&amp;apos;multer&amp;apos;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;var upload = multer(&amp;#123; dest: &amp;apos;uploads/&amp;apos; &amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;var app = express()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;app.post(&amp;apos;/profile&amp;apos;, upload.single(&amp;apos;avatar&amp;apos;), function (req, res, next) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  // req.file is the `avatar` file&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  // req.body will hold the text fields, if there were any&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;app.post(&amp;apos;/photos/upload&amp;apos;, upload.array(&amp;apos;photos&amp;apos;, 12), function (req, res, next) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  // req.files is array of `photos` files&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  // req.body will contain the text fields, if there were any&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;var cpUpload = upload.fields([&amp;#123; name: &amp;apos;avatar&amp;apos;, maxCount: 1 &amp;#125;, &amp;#123; name: &amp;apos;gallery&amp;apos;, maxCount: 8 &amp;#125;])&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;app.post(&amp;apos;/cool-profile&amp;apos;, cpUpload, function (req, res, next) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  // req.files is an object (String -&amp;gt; Array) where fieldname is the key, and the value is array of files&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  //&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  // e.g.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  //  req.files[&amp;apos;avatar&amp;apos;][0] -&amp;gt; File&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  //  req.files[&amp;apos;gallery&amp;apos;] -&amp;gt; Array&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  //&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  // req.body will contain the text fields, if there were any&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;In case you need to handle a text-only multipart form, you can use any of the multer methods (.single(), .array(), fields()). Here is an example using .array():&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;var express = require(&amp;apos;express&amp;apos;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;var app = express()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;var multer  = require(&amp;apos;multer&amp;apos;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;var upload = multer()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;app.post(&amp;apos;/profile&amp;apos;, upload.array(), function (req, res, next) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  // req.body contains the text fields&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h1 id=&quot;API&quot;&gt;&lt;a href=&quot;#API&quot; class=&quot;headerlink&quot; title=&quot;API&quot;&gt;&lt;/a&gt;API&lt;/h1&gt;&lt;h2 id=&quot;File-information&quot;&gt;&lt;a href=&quot;#File-information&quot; class=&quot;headerlink&quot; title=&quot;File information&quot;&gt;&lt;/a&gt;File information&lt;/h2&gt;&lt;h3 id=&quot;Each-file-contains-the-following-information&quot;&gt;&lt;a href=&quot;#Each-file-contains-the-following-information&quot; class=&quot;headerlink&quot; title=&quot;Each file contains the following information:&quot;&gt;&lt;/a&gt;Each file contains the following information:&lt;/h3&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Key&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Note&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;fieldname&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Field name specified in the form&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;originalname&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Name of the file on the user’s computer&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;encoding&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Encoding type of the file&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;mimetype&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Mime type of the file&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;size&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Size of the file in bytes&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;destination&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The folder to which the file has been saved&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;DiskStorage&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;filename&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The name of the file within the &lt;code&gt;destination&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;DiskStorage&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;path&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The full path to the uploaded file&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;DiskStorage&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;buffer&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;A &lt;code&gt;Buffer&lt;/code&gt; of the entire file&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;MemoryStorage&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&quot;multer-opts&quot;&gt;&lt;a href=&quot;#multer-opts&quot; class=&quot;headerlink&quot; title=&quot;multer(opts)&quot;&gt;&lt;/a&gt;&lt;code&gt;multer(opts)&lt;/code&gt;&lt;/h3&gt;&lt;p&gt;Multer accepts an options object, the most basic of which is the &lt;code&gt;dest&lt;/code&gt;&lt;br&gt;property, which tells Multer where to upload the files. In case you omit the&lt;br&gt;options object, the files will be kept in memory and never written to disk.&lt;/p&gt;
+&lt;p&gt;By default, Multer will rename the files so as to avoid naming conflicts. The&lt;br&gt;renaming function can be customized according to your needs.&lt;/p&gt;
+&lt;p&gt;The following are the options that can be passed to Multer.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Key&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;dest&lt;/code&gt; or &lt;code&gt;storage&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Where to store the files&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;fileFilter&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Function to control which files are accepted&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;limits&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Limits of the uploaded data&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;In an average web app, only &lt;code&gt;dest&lt;/code&gt; might be required, and configured as shown in&lt;br&gt;the following example.&lt;/p&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; upload = multer(&amp;#123; dest: &lt;span class=&quot;string&quot;&gt;&#39;uploads/&#39;&lt;/span&gt; &amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;If you want more control over your uploads, you’ll want to use the &lt;code&gt;storage&lt;/code&gt;&lt;br&gt;option instead of &lt;code&gt;dest&lt;/code&gt;. Multer ships with storage engines &lt;code&gt;DiskStorage&lt;/code&gt;&lt;br&gt;and &lt;code&gt;MemoryStorage&lt;/code&gt;; More engines are available from third parties.&lt;/p&gt;
+&lt;h4 id=&quot;single-fieldname&quot;&gt;&lt;a href=&quot;#single-fieldname&quot; class=&quot;headerlink&quot; title=&quot;.single(fieldname)&quot;&gt;&lt;/a&gt;&lt;code&gt;.single(fieldname)&lt;/code&gt;&lt;/h4&gt;&lt;p&gt;Accept a single file with the name &lt;code&gt;fieldname&lt;/code&gt;. The single file will be stored&lt;br&gt;in &lt;code&gt;req.file&lt;/code&gt;.&lt;/p&gt;
+&lt;h4 id=&quot;array-fieldname-maxCount&quot;&gt;&lt;a href=&quot;#array-fieldname-maxCount&quot; class=&quot;headerlink&quot; title=&quot;.array(fieldname[, maxCount])&quot;&gt;&lt;/a&gt;&lt;code&gt;.array(fieldname[, maxCount])&lt;/code&gt;&lt;/h4&gt;&lt;p&gt;Accept an array of files, all with the name &lt;code&gt;fieldname&lt;/code&gt;. Optionally error out if&lt;br&gt;more than &lt;code&gt;maxCount&lt;/code&gt; files are uploaded. The array of files will be stored in&lt;br&gt;&lt;code&gt;req.files&lt;/code&gt;.&lt;/p&gt;
+&lt;h4 id=&quot;fields-fields&quot;&gt;&lt;a href=&quot;#fields-fields&quot; class=&quot;headerlink&quot; title=&quot;.fields(fields)&quot;&gt;&lt;/a&gt;&lt;code&gt;.fields(fields)&lt;/code&gt;&lt;/h4&gt;&lt;p&gt;Accept a mix of files, specified by &lt;code&gt;fields&lt;/code&gt;. An object with arrays of files&lt;br&gt;will be stored in &lt;code&gt;req.files&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;fields&lt;/code&gt; should be an array of objects with &lt;code&gt;name&lt;/code&gt; and optionally a &lt;code&gt;maxCount&lt;/code&gt;.&lt;br&gt;Example:&lt;/p&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;[&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#123; name: &lt;span class=&quot;string&quot;&gt;&#39;avatar&#39;&lt;/span&gt;, maxCount: &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt; &amp;#125;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#123; name: &lt;span class=&quot;string&quot;&gt;&#39;gallery&#39;&lt;/span&gt;, maxCount: &lt;span class=&quot;number&quot;&gt;8&lt;/span&gt; &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;]&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h4 id=&quot;any&quot;&gt;&lt;a href=&quot;#any&quot; class=&quot;headerlink&quot; title=&quot;.any()&quot;&gt;&lt;/a&gt;&lt;code&gt;.any()&lt;/code&gt;&lt;/h4&gt;&lt;p&gt;Accepts all files that comes over the wire. An array of files will be stored in&lt;br&gt;&lt;code&gt;req.files&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;WARNING:&lt;/strong&gt; Make sure that you always handle the files that a user uploads.&lt;br&gt;Never add multer as a global middleware since a malicious user could upload&lt;br&gt;files to a route that you didn’t anticipate. Only use this function on routes&lt;br&gt;where you are handling the uploaded files.&lt;/p&gt;
+&lt;h3 id=&quot;storage&quot;&gt;&lt;a href=&quot;#storage&quot; class=&quot;headerlink&quot; title=&quot;storage&quot;&gt;&lt;/a&gt;&lt;code&gt;storage&lt;/code&gt;&lt;/h3&gt;&lt;h4 id=&quot;DiskStorage&quot;&gt;&lt;a href=&quot;#DiskStorage&quot; class=&quot;headerlink&quot; title=&quot;DiskStorage&quot;&gt;&lt;/a&gt;&lt;code&gt;DiskStorage&lt;/code&gt;&lt;/h4&gt;&lt;p&gt;The disk storage engine gives you full control on storing files to disk.&lt;/p&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; storage = multer.diskStorage(&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  destination: &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; (&lt;span class=&quot;params&quot;&gt;req, file, cb&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    cb(&lt;span class=&quot;literal&quot;&gt;null&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;/tmp/my-uploads&#39;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  filename: &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; (&lt;span class=&quot;params&quot;&gt;req, file, cb&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    cb(&lt;span class=&quot;literal&quot;&gt;null&lt;/span&gt;, file.fieldname + &lt;span class=&quot;string&quot;&gt;&#39;-&#39;&lt;/span&gt; + &lt;span class=&quot;built_in&quot;&gt;Date&lt;/span&gt;.now())&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; upload = multer(&amp;#123; storage: storage &amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;There are two options available, &lt;code&gt;destination&lt;/code&gt; and &lt;code&gt;filename&lt;/code&gt;. They are both&lt;br&gt;functions that determine where the file should be stored.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;destination&lt;/code&gt; is used to determine within which folder the uploaded files should&lt;br&gt;be stored. This can also be given as a &lt;code&gt;string&lt;/code&gt; (e.g. &lt;code&gt;&amp;#39;/tmp/uploads&amp;#39;&lt;/code&gt;). If no&lt;br&gt;&lt;code&gt;destination&lt;/code&gt; is given, the operating system’s default directory for temporary&lt;br&gt;files is used.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; You are responsible for creating the directory when providing&lt;br&gt;&lt;code&gt;destination&lt;/code&gt; as a function. When passing a string, multer will make sure that&lt;br&gt;the directory is created for you.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;filename&lt;/code&gt; is used to determine what the file should be named inside the folder.&lt;br&gt;If no &lt;code&gt;filename&lt;/code&gt; is given, each file will be given a random name that doesn’t&lt;br&gt;include any file extension.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Multer will not append any file extension for you, your function&lt;br&gt;should return a filename complete with an file extension.&lt;/p&gt;
+&lt;p&gt;Each function gets passed both the request (&lt;code&gt;req&lt;/code&gt;) and some information about&lt;br&gt;the file (&lt;code&gt;file&lt;/code&gt;) to aid with the decision.&lt;/p&gt;
+&lt;p&gt;Note that &lt;code&gt;req.body&lt;/code&gt; might not have been fully populated yet. It depends on the&lt;br&gt;order that the client transmits fields and files to the server.&lt;/p&gt;
+&lt;h4 id=&quot;MemoryStorage&quot;&gt;&lt;a href=&quot;#MemoryStorage&quot; class=&quot;headerlink&quot; title=&quot;MemoryStorage&quot;&gt;&lt;/a&gt;&lt;code&gt;MemoryStorage&lt;/code&gt;&lt;/h4&gt;&lt;p&gt;The memory storage engine stores the files in memory as &lt;code&gt;Buffer&lt;/code&gt; objects. It&lt;br&gt;doesn’t have any options.&lt;/p&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; storage = multer.memoryStorage()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; upload = multer(&amp;#123; storage: storage &amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;When using memory storage, the file info will contain a field called&lt;br&gt;&lt;code&gt;buffer&lt;/code&gt; that contains the entire file.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;WARNING&lt;/strong&gt;: Uploading very large files, or relatively small files in large&lt;br&gt;numbers very quickly, can cause your application to run out of memory when&lt;br&gt;memory storage is used.&lt;/p&gt;
+&lt;h3 id=&quot;limits&quot;&gt;&lt;a href=&quot;#limits&quot; class=&quot;headerlink&quot; title=&quot;limits&quot;&gt;&lt;/a&gt;&lt;code&gt;limits&lt;/code&gt;&lt;/h3&gt;&lt;p&gt;An object specifying the size limits of the following optional properties. Multer passes this object into busboy directly, and the details of the properties can be found on &lt;a href=&quot;https://github.com/mscdex/busboy#busboy-methods&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;busboy’s page&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The following integer values are available:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Key&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Default&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;fieldNameSize&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Max field name size&lt;/td&gt;
+&lt;td&gt;100 bytes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;fieldSize&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Max field value size&lt;/td&gt;
+&lt;td&gt;1MB&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;fields&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Max number of non-file fields&lt;/td&gt;
+&lt;td&gt;Infinity&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;fileSize&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;For multipart forms, the max file size (in bytes)&lt;/td&gt;
+&lt;td&gt;Infinity&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;files&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;For multipart forms, the max number of file fields&lt;/td&gt;
+&lt;td&gt;Infinity&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;parts&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;For multipart forms, the max number of parts (fields + files)&lt;/td&gt;
+&lt;td&gt;Infinity&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;headerPairs&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;For multipart forms, the max number of header key=&amp;gt;value pairs to parse&lt;/td&gt;
+&lt;td&gt;2000&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Specifying the limits can help protect your site against denial of service (DoS) attacks.&lt;/p&gt;
+&lt;h3 id=&quot;fileFilter&quot;&gt;&lt;a href=&quot;#fileFilter&quot; class=&quot;headerlink&quot; title=&quot;fileFilter&quot;&gt;&lt;/a&gt;&lt;code&gt;fileFilter&lt;/code&gt;&lt;/h3&gt;&lt;p&gt;Set this to a function to control which files should be uploaded and which&lt;br&gt;should be skipped. The function should look like this:&lt;/p&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;fileFilter&lt;/span&gt; (&lt;span class=&quot;params&quot;&gt;req, file, cb&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;comment&quot;&gt;// The function should call `cb` with a boolean&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;comment&quot;&gt;// to indicate if the file should be accepted&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;comment&quot;&gt;// To reject this file pass `false`, like so:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  cb(&lt;span class=&quot;literal&quot;&gt;null&lt;/span&gt;, &lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;comment&quot;&gt;// To accept the file pass `true`, like so:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  cb(&lt;span class=&quot;literal&quot;&gt;null&lt;/span&gt;, &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;comment&quot;&gt;// You can always pass an error if something goes wrong:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  cb(&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;Error&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&#39;I don\&#39;t have a clue!&#39;&lt;/span&gt;))&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&quot;Error-handling&quot;&gt;&lt;a href=&quot;#Error-handling&quot; class=&quot;headerlink&quot; title=&quot;Error handling&quot;&gt;&lt;/a&gt;Error handling&lt;/h2&gt;&lt;p&gt;When encountering an error, multer will delegate the error to express. You can&lt;br&gt;display a nice error page using &lt;a href=&quot;http://expressjs.com/guide/error-handling.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;the standard express way&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If you want to catch errors specifically from multer, you can call the&lt;br&gt;middleware function by yourself.&lt;/p&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; upload = multer().single(&lt;span class=&quot;string&quot;&gt;&#39;avatar&#39;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;app.post(&lt;span class=&quot;string&quot;&gt;&#39;/profile&#39;&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; (&lt;span class=&quot;params&quot;&gt;req, res&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  upload(req, res, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; (&lt;span class=&quot;params&quot;&gt;err&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (err) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;comment&quot;&gt;// An error occurred when uploading&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;// Everything went fine&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h1 id=&quot;Koa-multer&quot;&gt;&lt;a href=&quot;#Koa-multer&quot; class=&quot;headerlink&quot; title=&quot;Koa-multer&quot;&gt;&lt;/a&gt;Koa-multer&lt;/h1&gt;&lt;h1 id=&quot;Installation&quot;&gt;&lt;a href=&quot;#Installation&quot; class=&quot;headerlink&quot; title=&quot;Installation&quot;&gt;&lt;/a&gt;Installation&lt;/h1&gt;&lt;p&gt;&lt;code&gt;npm install --save koa-multer&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&quot;Usage&quot;&gt;&lt;a href=&quot;#Usage&quot; class=&quot;headerlink&quot; title=&quot;Usage&quot;&gt;&lt;/a&gt;Usage&lt;/h2&gt;&lt;h3 id=&quot;1-x-100-working-with-multer-v1-x-and-koa-v2-x&quot;&gt;&lt;a href=&quot;#1-x-100-working-with-multer-v1-x-and-koa-v2-x&quot; class=&quot;headerlink&quot; title=&quot;=1.x, 100%, working with multer-v1.x and koa-v2.x.&quot;&gt;&lt;/a&gt;&lt;strong&gt;=1.x&lt;/strong&gt;, &lt;strong&gt;100%&lt;/strong&gt;, working with &lt;a href=&quot;https://github.com/expressjs/multer&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;multer-v1.x&lt;/a&gt; and &lt;a href=&quot;https://github.com/koajs/koa/tree/v2.x&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;koa-v2.x&lt;/a&gt;.&lt;/h3&gt;&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; Koa = &lt;span class=&quot;built_in&quot;&gt;require&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&#39;koa&#39;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; route = &lt;span class=&quot;built_in&quot;&gt;require&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&#39;koa-route&#39;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; multer = &lt;span class=&quot;built_in&quot;&gt;require&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&#39;koa-multer&#39;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; app = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Koa();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; upload = multer(&amp;#123; dest: &lt;span class=&quot;string&quot;&gt;&#39;uploads/&#39;&lt;/span&gt; &amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;app.use(route.post(&lt;span class=&quot;string&quot;&gt;&#39;/profile&#39;&lt;/span&gt;, upload.single(&lt;span class=&quot;string&quot;&gt;&#39;avatar&#39;&lt;/span&gt;)));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;app.listen(&lt;span class=&quot;number&quot;&gt;3000&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;0-x-working-with-multer-v0-x-v0-1-8-is-the-latset-version-of-v0-x-and-koa-v1-x&quot;&gt;&lt;a href=&quot;#0-x-working-with-multer-v0-x-v0-1-8-is-the-latset-version-of-v0-x-and-koa-v1-x&quot; class=&quot;headerlink&quot; title=&quot;=0.x, working with multer-v0.x(v0.1.8 is the latset version of v0.x) and koa-v1.x&quot;&gt;&lt;/a&gt;&lt;strong&gt;=0.x&lt;/strong&gt;, working with &lt;code&gt;multer-v0.x&lt;/code&gt;(v0.1.8 is the latset version of v0.x) and &lt;a href=&quot;https://github.com/koajs/koa&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;koa-v1.x&lt;/a&gt;&lt;/h3&gt;&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; koa = &lt;span class=&quot;built_in&quot;&gt;require&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&#39;koa&#39;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; multer = &lt;span class=&quot;built_in&quot;&gt;require&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&#39;koa-multer&#39;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; app = koa();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;app.use(multer(&amp;#123; dest: &lt;span class=&quot;string&quot;&gt;&#39;./uploads/&#39;&lt;/span&gt;&amp;#125;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;app.listen(&lt;span class=&quot;number&quot;&gt;3000&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&quot;Custom-storage-engine&quot;&gt;&lt;a href=&quot;#Custom-storage-engine&quot; class=&quot;headerlink&quot; title=&quot;Custom storage engine&quot;&gt;&lt;/a&gt;Custom storage engine&lt;/h2&gt;&lt;h1 id=&quot;Multer-Storage-Engine&quot;&gt;&lt;a href=&quot;#Multer-Storage-Engine&quot; class=&quot;headerlink&quot; title=&quot;Multer Storage Engine&quot;&gt;&lt;/a&gt;Multer Storage Engine&lt;/h1&gt;&lt;p&gt;Storage engines are classes that expose two functions: &lt;code&gt;_handleFile&lt;/code&gt; and &lt;code&gt;_removeFile&lt;/code&gt;.&lt;br&gt;Follow the template below to get started with your own custom storage engine.&lt;/p&gt;
+&lt;p&gt;When asking the user for input (such as where to save this file), always give&lt;br&gt;them the parameters &lt;code&gt;req, file, cb&lt;/code&gt;, in this order. This makes it easier for&lt;br&gt;developers to switch between storage engines.&lt;/p&gt;
+&lt;p&gt;For example, in the template below, the engine saves the files to the disk. The&lt;br&gt;user tells the engine where to save the file, and this is done by&lt;br&gt;providing the &lt;code&gt;destination&lt;/code&gt; parameter:&lt;/p&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; storage = myCustomStorage(&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  destination: &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; (&lt;span class=&quot;params&quot;&gt;req, file, cb&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    cb(&lt;span class=&quot;literal&quot;&gt;null&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;/var/www/uploads/&#39;&lt;/span&gt; + file.originalname)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;Your engine is responsible for storing the file and returning information on how to&lt;br&gt;access the file in the future. This is done by the &lt;code&gt;_handleFile&lt;/code&gt; function.&lt;/p&gt;
+&lt;p&gt;The file data will be given to you as a stream (&lt;code&gt;file.stream&lt;/code&gt;). You should pipe&lt;br&gt;this data somewhere, and when you are done, call &lt;code&gt;cb&lt;/code&gt; with some information on the&lt;br&gt;file.&lt;/p&gt;
+&lt;p&gt;The information you provide in the callback will be merged with multer’s file object,&lt;br&gt;and then presented to the user via &lt;code&gt;req.files&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Your engine is also responsible for removing files if an error is encountered&lt;br&gt;later on. Multer will decide which files to delete and when. Your storage class must&lt;br&gt;implement the &lt;code&gt;_removeFile&lt;/code&gt; function. It will receive the same arguments as&lt;br&gt;&lt;code&gt;_handleFile&lt;/code&gt;. Invoke the callback once the file has been removed.&lt;/p&gt;
+&lt;h2 id=&quot;Template&quot;&gt;&lt;a href=&quot;#Template&quot; class=&quot;headerlink&quot; title=&quot;Template&quot;&gt;&lt;/a&gt;Template&lt;/h2&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;34&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; fs = &lt;span class=&quot;built_in&quot;&gt;require&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&#39;fs&#39;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;getDestination&lt;/span&gt; (&lt;span class=&quot;params&quot;&gt;req, file, cb&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  cb(&lt;span class=&quot;literal&quot;&gt;null&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;/dev/null&#39;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;MyCustomStorage&lt;/span&gt; (&lt;span class=&quot;params&quot;&gt;opts&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  opts.getDestination = (opts.destination || getDestination)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;MyCustomStorage.prototype._handleFile = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;_handleFile&lt;/span&gt; (&lt;span class=&quot;params&quot;&gt;req, file, cb&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.getDestination(req, file, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; (&lt;span class=&quot;params&quot;&gt;err, path&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (err) &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; cb(err)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; outStream = fs.createWriteStream(path)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    file.stream.pipe(outStream)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    outStream.on(&lt;span class=&quot;string&quot;&gt;&#39;error&#39;&lt;/span&gt;, cb)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    outStream.on(&lt;span class=&quot;string&quot;&gt;&#39;finish&#39;&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; (&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      cb(&lt;span class=&quot;literal&quot;&gt;null&lt;/span&gt;, &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        path: path,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        size: outStream.bytesWritten&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;MyCustomStorage.prototype._removeFile = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;_removeFile&lt;/span&gt; (&lt;span class=&quot;params&quot;&gt;req, file, cb&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  fs.unlink(file.path, cb)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;module&lt;/span&gt;.exports = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; (&lt;span class=&quot;params&quot;&gt;opts&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; MyCustomStorage(opts)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&quot;License&quot;&gt;&lt;a href=&quot;#License&quot; class=&quot;headerlink&quot; title=&quot;License&quot;&gt;&lt;/a&gt;License&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;LICENSE&quot;&gt;MIT&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      Middleware for handling &lt;code&gt;multipart/form-data&lt;/code&gt;.
+    
+    </summary>
+    
+      <category term="nodejs upload multer" scheme="http://blog.printf.me/categories/nodejs-upload-multer/"/>
+    
+    
+      <category term="nodejs upload multer" scheme="http://blog.printf.me/tags/nodejs-upload-multer/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>电子书橱</title>
+    <link href="http://blog.printf.me/2016/04/20/book-store/"/>
+    <id>http://blog.printf.me/2016/04/20/book-store/</id>
+    <published>2016-04-20T09:41:54.000Z</published>
+    <updated>2016-04-27T09:22:53.668Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;项目名称：电子书橱&quot;&gt;&lt;a href=&quot;#项目名称：电子书橱&quot; class=&quot;headerlink&quot; title=&quot;项目名称：电子书橱&quot;&gt;&lt;/a&gt;项目名称：电子书橱&lt;/h3&gt;&lt;h3 id=&quot;项目合作：Feynman-Xavier&quot;&gt;&lt;a href=&quot;#项目合作：Feynman-Xavier&quot; class=&quot;headerlink&quot; title=&quot;项目合作：Feynman Xavier&quot;&gt;&lt;/a&gt;项目合作：Feynman Xavier&lt;/h3&gt;&lt;h3 id=&quot;代码地址：coding-net&quot;&gt;&lt;a href=&quot;#代码地址：coding-net&quot; class=&quot;headerlink&quot; title=&quot;代码地址：coding.net&quot;&gt;&lt;/a&gt;代码地址：&lt;a href=&quot;https://coding.net/u/pmaxloo/p/eBookStore&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;coding.net&lt;/a&gt;&lt;/h3&gt;&lt;hr&gt;
+&lt;p&gt;2016.4.20 项目初步讨论&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;需求分析&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;自己积累的电子书较多，缺少管理，分布较散乱，不好查找（资源整合）&lt;/li&gt;
+&lt;li&gt;有部分看了一些，放下来，又忘记了，然后找不回来了（资源搜索）&lt;/li&gt;
+&lt;li&gt;有的自己想看，但网上电脑上找不到资源，而别人有，但不知道（资源共享）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;可行性分析&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;功能分析&lt;br&gt;&lt;img src=&quot;http://kaifa.wy.cn:500/Picture/Show/f3ca13d1-7faf-4759-b585-34fdafb0a98c&quot; alt=&quot;电子书橱&quot;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;技术设计分析&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如何高效地存储和管理电子书，避免重复，搜索便捷，下载迅速&lt;/li&gt;
+&lt;li&gt;如何实现pdf类翻书效果(&lt;a href=&quot;http://mozilla.github.io/pdf.js&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;pdf.js&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;如何记录用户笔记&lt;/li&gt;
+&lt;li&gt;如何记录用户阅读历史&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+    
+    <summary type="html">
+    
+      电子书管理系统，可上传，下载，在线阅读，添加阅读笔记等
+    
+    </summary>
+    
+      <category term="创意项目" scheme="http://blog.printf.me/categories/%E5%88%9B%E6%84%8F%E9%A1%B9%E7%9B%AE/"/>
+    
+    
+      <category term="创意" scheme="http://blog.printf.me/tags/%E5%88%9B%E6%84%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://blog.printf.me/2016/04/07/hello-world/"/>
+    <id>http://blog.printf.me/2016/04/07/hello-world/</id>
+    <published>2016-04-07T01:37:54.000Z</published>
+    <updated>2016-04-27T09:22:53.683Z</updated>
+    
+    <content type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo new &lt;span class=&quot;string&quot;&gt;&quot;My New Post&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/writing.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Writing&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Run-server&quot;&gt;&lt;a href=&quot;#Run-server&quot; class=&quot;headerlink&quot; title=&quot;Run server&quot;&gt;&lt;/a&gt;Run server&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo server&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/server.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Server&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Generate-static-files&quot;&gt;&lt;a href=&quot;#Generate-static-files&quot; class=&quot;headerlink&quot; title=&quot;Generate static files&quot;&gt;&lt;/a&gt;Generate static files&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo generate&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/generating.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Generating&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Deploy-to-remote-sites&quot;&gt;&lt;a href=&quot;#Deploy-to-remote-sites&quot; class=&quot;headerlink&quot; title=&quot;Deploy to remote sites&quot;&gt;&lt;/a&gt;Deploy to remote sites&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo deploy&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/deployment.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Deployment&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      say hello
+    
+    </summary>
+    
+      <category term="HelloWorld" scheme="http://blog.printf.me/categories/HelloWorld/"/>
+    
+    
+  </entry>
+  
+</feed>
