@@ -1,0 +1,323 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>multer | FeynmanBlog</title>
+  <meta name="author" content="Feynman">
+  
+  <meta name="description" content="Middleware for handling &lt;code&gt;multipart/form-data&lt;/code&gt;.">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="multer"/>
+  <meta property="og:site_name" content="FeynmanBlog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="FeynmanBlog" type="application/atom+xml">
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">  
+  <link rel="stylesheet" href="/css/sidenav.css" media="screen" type="text/css">  
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+
+</head>
+
+<body id="body" data-spy="scroll" data-target=".toc">
+  <div class="container" id="container">
+	<div class="content">
+	  <div class="page-header">		
+  <h1><a class="brand" href="/">FeynmanBlog</a><span class="split"></span><span class="title">multer</span><span class="date" id="title-date"><i class="fa fa-clock-o"></i> 2016-04-27</span></h1>
+</div>		
+
+<div class="row page">
+  <!-- cols -->	
+  
+  
+
+  
+	<div class="col-md-12">
+	  
+
+	  <!-- content -->
+	  <h3 id="中间件名称：multer"><a href="#中间件名称：multer" class="headerlink" title="中间件名称：multer"></a>中间件名称：multer</h3><h3 id="用途：Middleware-for-handling-multipart-form-data"><a href="#用途：Middleware-for-handling-multipart-form-data" class="headerlink" title="用途：Middleware for handling multipart/form-data."></a>用途：Middleware for handling <code>multipart/form-data</code>.</h3><h3 id="源码地址：github-multer"><a href="#源码地址：github-multer" class="headerlink" title="源码地址：github/multer"></a>源码地址：<a href="https://github.com/expressjs/multer" target="_blank" rel="external">github/multer</a></h3><hr>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p><code>npm install --save multer</code></p>
+<h1 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明</h1><p>Multer adds a body object and a file or files object to the request object. The body object contains the values of the text fields of the form, the file or files object contains the files uploaded via the form.</p>
+<h2 id="简单例子："><a href="#简单例子：" class="headerlink" title="简单例子："></a>简单例子：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">var express = require(&apos;express&apos;)</span><br><span class="line">var multer  = require(&apos;multer&apos;)</span><br><span class="line">var upload = multer(&#123; dest: &apos;uploads/&apos; &#125;)</span><br><span class="line"></span><br><span class="line">var app = express()</span><br><span class="line"></span><br><span class="line">app.post(&apos;/profile&apos;, upload.single(&apos;avatar&apos;), function (req, res, next) &#123;</span><br><span class="line">  // req.file is the `avatar` file</span><br><span class="line">  // req.body will hold the text fields, if there were any</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.post(&apos;/photos/upload&apos;, upload.array(&apos;photos&apos;, 12), function (req, res, next) &#123;</span><br><span class="line">  // req.files is array of `photos` files</span><br><span class="line">  // req.body will contain the text fields, if there were any</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">var cpUpload = upload.fields([&#123; name: &apos;avatar&apos;, maxCount: 1 &#125;, &#123; name: &apos;gallery&apos;, maxCount: 8 &#125;])</span><br><span class="line">app.post(&apos;/cool-profile&apos;, cpUpload, function (req, res, next) &#123;</span><br><span class="line">  // req.files is an object (String -&gt; Array) where fieldname is the key, and the value is array of files</span><br><span class="line">  //</span><br><span class="line">  // e.g.</span><br><span class="line">  //  req.files[&apos;avatar&apos;][0] -&gt; File</span><br><span class="line">  //  req.files[&apos;gallery&apos;] -&gt; Array</span><br><span class="line">  //</span><br><span class="line">  // req.body will contain the text fields, if there were any</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>In case you need to handle a text-only multipart form, you can use any of the multer methods (.single(), .array(), fields()). Here is an example using .array():<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var express = require(&apos;express&apos;)</span><br><span class="line">var app = express()</span><br><span class="line">var multer  = require(&apos;multer&apos;)</span><br><span class="line">var upload = multer()</span><br><span class="line"></span><br><span class="line">app.post(&apos;/profile&apos;, upload.array(), function (req, res, next) &#123;</span><br><span class="line">  // req.body contains the text fields</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<h1 id="API"><a href="#API" class="headerlink" title="API"></a>API</h1><h2 id="File-information"><a href="#File-information" class="headerlink" title="File information"></a>File information</h2><h3 id="Each-file-contains-the-following-information"><a href="#Each-file-contains-the-following-information" class="headerlink" title="Each file contains the following information:"></a>Each file contains the following information:</h3><table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>fieldname</code></td>
+<td>Field name specified in the form</td>
+<td></td>
+</tr>
+<tr>
+<td><code>originalname</code></td>
+<td>Name of the file on the user’s computer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>encoding</code></td>
+<td>Encoding type of the file</td>
+<td></td>
+</tr>
+<tr>
+<td><code>mimetype</code></td>
+<td>Mime type of the file</td>
+<td></td>
+</tr>
+<tr>
+<td><code>size</code></td>
+<td>Size of the file in bytes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>destination</code></td>
+<td>The folder to which the file has been saved</td>
+<td><code>DiskStorage</code></td>
+</tr>
+<tr>
+<td><code>filename</code></td>
+<td>The name of the file within the <code>destination</code></td>
+<td><code>DiskStorage</code></td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td>The full path to the uploaded file</td>
+<td><code>DiskStorage</code></td>
+</tr>
+<tr>
+<td><code>buffer</code></td>
+<td>A <code>Buffer</code> of the entire file</td>
+<td><code>MemoryStorage</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="multer-opts"><a href="#multer-opts" class="headerlink" title="multer(opts)"></a><code>multer(opts)</code></h3><p>Multer accepts an options object, the most basic of which is the <code>dest</code><br>property, which tells Multer where to upload the files. In case you omit the<br>options object, the files will be kept in memory and never written to disk.</p>
+<p>By default, Multer will rename the files so as to avoid naming conflicts. The<br>renaming function can be customized according to your needs.</p>
+<p>The following are the options that can be passed to Multer.</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dest</code> or <code>storage</code></td>
+<td>Where to store the files</td>
+</tr>
+<tr>
+<td><code>fileFilter</code></td>
+<td>Function to control which files are accepted</td>
+</tr>
+<tr>
+<td><code>limits</code></td>
+<td>Limits of the uploaded data</td>
+</tr>
+</tbody>
+</table>
+<p>In an average web app, only <code>dest</code> might be required, and configured as shown in<br>the following example.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> upload = multer(&#123; dest: <span class="string">'uploads/'</span> &#125;)</span><br></pre></td></tr></table></figure>
+<p>If you want more control over your uploads, you’ll want to use the <code>storage</code><br>option instead of <code>dest</code>. Multer ships with storage engines <code>DiskStorage</code><br>and <code>MemoryStorage</code>; More engines are available from third parties.</p>
+<h4 id="single-fieldname"><a href="#single-fieldname" class="headerlink" title=".single(fieldname)"></a><code>.single(fieldname)</code></h4><p>Accept a single file with the name <code>fieldname</code>. The single file will be stored<br>in <code>req.file</code>.</p>
+<h4 id="array-fieldname-maxCount"><a href="#array-fieldname-maxCount" class="headerlink" title=".array(fieldname[, maxCount])"></a><code>.array(fieldname[, maxCount])</code></h4><p>Accept an array of files, all with the name <code>fieldname</code>. Optionally error out if<br>more than <code>maxCount</code> files are uploaded. The array of files will be stored in<br><code>req.files</code>.</p>
+<h4 id="fields-fields"><a href="#fields-fields" class="headerlink" title=".fields(fields)"></a><code>.fields(fields)</code></h4><p>Accept a mix of files, specified by <code>fields</code>. An object with arrays of files<br>will be stored in <code>req.files</code>.</p>
+<p><code>fields</code> should be an array of objects with <code>name</code> and optionally a <code>maxCount</code>.<br>Example:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123; name: <span class="string">'avatar'</span>, maxCount: <span class="number">1</span> &#125;,</span><br><span class="line">  &#123; name: <span class="string">'gallery'</span>, maxCount: <span class="number">8</span> &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h4 id="any"><a href="#any" class="headerlink" title=".any()"></a><code>.any()</code></h4><p>Accepts all files that comes over the wire. An array of files will be stored in<br><code>req.files</code>.</p>
+<p><strong>WARNING:</strong> Make sure that you always handle the files that a user uploads.<br>Never add multer as a global middleware since a malicious user could upload<br>files to a route that you didn’t anticipate. Only use this function on routes<br>where you are handling the uploaded files.</p>
+<h3 id="storage"><a href="#storage" class="headerlink" title="storage"></a><code>storage</code></h3><h4 id="DiskStorage"><a href="#DiskStorage" class="headerlink" title="DiskStorage"></a><code>DiskStorage</code></h4><p>The disk storage engine gives you full control on storing files to disk.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> storage = multer.diskStorage(&#123;</span><br><span class="line">  destination: <span class="function"><span class="keyword">function</span> (<span class="params">req, file, cb</span>) </span>&#123;</span><br><span class="line">    cb(<span class="literal">null</span>, <span class="string">'/tmp/my-uploads'</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  filename: <span class="function"><span class="keyword">function</span> (<span class="params">req, file, cb</span>) </span>&#123;</span><br><span class="line">    cb(<span class="literal">null</span>, file.fieldname + <span class="string">'-'</span> + <span class="built_in">Date</span>.now())</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> upload = multer(&#123; storage: storage &#125;)</span><br></pre></td></tr></table></figure>
+<p>There are two options available, <code>destination</code> and <code>filename</code>. They are both<br>functions that determine where the file should be stored.</p>
+<p><code>destination</code> is used to determine within which folder the uploaded files should<br>be stored. This can also be given as a <code>string</code> (e.g. <code>&#39;/tmp/uploads&#39;</code>). If no<br><code>destination</code> is given, the operating system’s default directory for temporary<br>files is used.</p>
+<p><strong>Note:</strong> You are responsible for creating the directory when providing<br><code>destination</code> as a function. When passing a string, multer will make sure that<br>the directory is created for you.</p>
+<p><code>filename</code> is used to determine what the file should be named inside the folder.<br>If no <code>filename</code> is given, each file will be given a random name that doesn’t<br>include any file extension.</p>
+<p><strong>Note:</strong> Multer will not append any file extension for you, your function<br>should return a filename complete with an file extension.</p>
+<p>Each function gets passed both the request (<code>req</code>) and some information about<br>the file (<code>file</code>) to aid with the decision.</p>
+<p>Note that <code>req.body</code> might not have been fully populated yet. It depends on the<br>order that the client transmits fields and files to the server.</p>
+<h4 id="MemoryStorage"><a href="#MemoryStorage" class="headerlink" title="MemoryStorage"></a><code>MemoryStorage</code></h4><p>The memory storage engine stores the files in memory as <code>Buffer</code> objects. It<br>doesn’t have any options.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> storage = multer.memoryStorage()</span><br><span class="line"><span class="keyword">var</span> upload = multer(&#123; storage: storage &#125;)</span><br></pre></td></tr></table></figure>
+<p>When using memory storage, the file info will contain a field called<br><code>buffer</code> that contains the entire file.</p>
+<p><strong>WARNING</strong>: Uploading very large files, or relatively small files in large<br>numbers very quickly, can cause your application to run out of memory when<br>memory storage is used.</p>
+<h3 id="limits"><a href="#limits" class="headerlink" title="limits"></a><code>limits</code></h3><p>An object specifying the size limits of the following optional properties. Multer passes this object into busboy directly, and the details of the properties can be found on <a href="https://github.com/mscdex/busboy#busboy-methods" target="_blank" rel="external">busboy’s page</a>.</p>
+<p>The following integer values are available:</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>fieldNameSize</code></td>
+<td>Max field name size</td>
+<td>100 bytes</td>
+</tr>
+<tr>
+<td><code>fieldSize</code></td>
+<td>Max field value size</td>
+<td>1MB</td>
+</tr>
+<tr>
+<td><code>fields</code></td>
+<td>Max number of non-file fields</td>
+<td>Infinity</td>
+</tr>
+<tr>
+<td><code>fileSize</code></td>
+<td>For multipart forms, the max file size (in bytes)</td>
+<td>Infinity</td>
+</tr>
+<tr>
+<td><code>files</code></td>
+<td>For multipart forms, the max number of file fields</td>
+<td>Infinity</td>
+</tr>
+<tr>
+<td><code>parts</code></td>
+<td>For multipart forms, the max number of parts (fields + files)</td>
+<td>Infinity</td>
+</tr>
+<tr>
+<td><code>headerPairs</code></td>
+<td>For multipart forms, the max number of header key=&gt;value pairs to parse</td>
+<td>2000</td>
+</tr>
+</tbody>
+</table>
+<p>Specifying the limits can help protect your site against denial of service (DoS) attacks.</p>
+<h3 id="fileFilter"><a href="#fileFilter" class="headerlink" title="fileFilter"></a><code>fileFilter</code></h3><p>Set this to a function to control which files should be uploaded and which<br>should be skipped. The function should look like this:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fileFilter</span> (<span class="params">req, file, cb</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// The function should call `cb` with a boolean</span></span><br><span class="line">  <span class="comment">// to indicate if the file should be accepted</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// To reject this file pass `false`, like so:</span></span><br><span class="line">  cb(<span class="literal">null</span>, <span class="literal">false</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// To accept the file pass `true`, like so:</span></span><br><span class="line">  cb(<span class="literal">null</span>, <span class="literal">true</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// You can always pass an error if something goes wrong:</span></span><br><span class="line">  cb(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'I don\'t have a clue!'</span>))</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Error-handling"><a href="#Error-handling" class="headerlink" title="Error handling"></a>Error handling</h2><p>When encountering an error, multer will delegate the error to express. You can<br>display a nice error page using <a href="http://expressjs.com/guide/error-handling.html" target="_blank" rel="external">the standard express way</a>.</p>
+<p>If you want to catch errors specifically from multer, you can call the<br>middleware function by yourself.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> upload = multer().single(<span class="string">'avatar'</span>)</span><br><span class="line"></span><br><span class="line">app.post(<span class="string">'/profile'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  upload(req, res, <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">      <span class="comment">// An error occurred when uploading</span></span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Everything went fine</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h1 id="Koa-multer"><a href="#Koa-multer" class="headerlink" title="Koa-multer"></a>Koa-multer</h1><h1 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h1><p><code>npm install --save koa-multer</code></p>
+<h2 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h2><h3 id="1-x-100-working-with-multer-v1-x-and-koa-v2-x"><a href="#1-x-100-working-with-multer-v1-x-and-koa-v2-x" class="headerlink" title="=1.x, 100%, working with multer-v1.x and koa-v2.x."></a><strong>=1.x</strong>, <strong>100%</strong>, working with <a href="https://github.com/expressjs/multer" target="_blank" rel="external">multer-v1.x</a> and <a href="https://github.com/koajs/koa/tree/v2.x" target="_blank" rel="external">koa-v2.x</a>.</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Koa = <span class="built_in">require</span>(<span class="string">'koa'</span>);</span><br><span class="line"><span class="keyword">const</span> route = <span class="built_in">require</span>(<span class="string">'koa-route'</span>);</span><br><span class="line"><span class="keyword">const</span> multer = <span class="built_in">require</span>(<span class="string">'koa-multer'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa();</span><br><span class="line"><span class="keyword">const</span> upload = multer(&#123; dest: <span class="string">'uploads/'</span> &#125;);</span><br><span class="line"></span><br><span class="line">app.use(route.post(<span class="string">'/profile'</span>, upload.single(<span class="string">'avatar'</span>)));</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="0-x-working-with-multer-v0-x-v0-1-8-is-the-latset-version-of-v0-x-and-koa-v1-x"><a href="#0-x-working-with-multer-v0-x-v0-1-8-is-the-latset-version-of-v0-x-and-koa-v1-x" class="headerlink" title="=0.x, working with multer-v0.x(v0.1.8 is the latset version of v0.x) and koa-v1.x"></a><strong>=0.x</strong>, working with <code>multer-v0.x</code>(v0.1.8 is the latset version of v0.x) and <a href="https://github.com/koajs/koa" target="_blank" rel="external">koa-v1.x</a></h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> koa = <span class="built_in">require</span>(<span class="string">'koa'</span>);</span><br><span class="line"><span class="keyword">var</span> multer = <span class="built_in">require</span>(<span class="string">'koa-multer'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> app = koa();</span><br><span class="line"></span><br><span class="line">app.use(multer(&#123; dest: <span class="string">'./uploads/'</span>&#125;));</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="Custom-storage-engine"><a href="#Custom-storage-engine" class="headerlink" title="Custom storage engine"></a>Custom storage engine</h2><h1 id="Multer-Storage-Engine"><a href="#Multer-Storage-Engine" class="headerlink" title="Multer Storage Engine"></a>Multer Storage Engine</h1><p>Storage engines are classes that expose two functions: <code>_handleFile</code> and <code>_removeFile</code>.<br>Follow the template below to get started with your own custom storage engine.</p>
+<p>When asking the user for input (such as where to save this file), always give<br>them the parameters <code>req, file, cb</code>, in this order. This makes it easier for<br>developers to switch between storage engines.</p>
+<p>For example, in the template below, the engine saves the files to the disk. The<br>user tells the engine where to save the file, and this is done by<br>providing the <code>destination</code> parameter:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> storage = myCustomStorage(&#123;</span><br><span class="line">  destination: <span class="function"><span class="keyword">function</span> (<span class="params">req, file, cb</span>) </span>&#123;</span><br><span class="line">    cb(<span class="literal">null</span>, <span class="string">'/var/www/uploads/'</span> + file.originalname)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>Your engine is responsible for storing the file and returning information on how to<br>access the file in the future. This is done by the <code>_handleFile</code> function.</p>
+<p>The file data will be given to you as a stream (<code>file.stream</code>). You should pipe<br>this data somewhere, and when you are done, call <code>cb</code> with some information on the<br>file.</p>
+<p>The information you provide in the callback will be merged with multer’s file object,<br>and then presented to the user via <code>req.files</code>.</p>
+<p>Your engine is also responsible for removing files if an error is encountered<br>later on. Multer will decide which files to delete and when. Your storage class must<br>implement the <code>_removeFile</code> function. It will receive the same arguments as<br><code>_handleFile</code>. Invoke the callback once the file has been removed.</p>
+<h2 id="Template"><a href="#Template" class="headerlink" title="Template"></a>Template</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getDestination</span> (<span class="params">req, file, cb</span>) </span>&#123;</span><br><span class="line">  cb(<span class="literal">null</span>, <span class="string">'/dev/null'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyCustomStorage</span> (<span class="params">opts</span>) </span>&#123;</span><br><span class="line">  opts.getDestination = (opts.destination || getDestination)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MyCustomStorage.prototype._handleFile = <span class="function"><span class="keyword">function</span> <span class="title">_handleFile</span> (<span class="params">req, file, cb</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.getDestination(req, file, <span class="function"><span class="keyword">function</span> (<span class="params">err, path</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (err) <span class="keyword">return</span> cb(err)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> outStream = fs.createWriteStream(path)</span><br><span class="line"></span><br><span class="line">    file.stream.pipe(outStream)</span><br><span class="line">    outStream.on(<span class="string">'error'</span>, cb)</span><br><span class="line">    outStream.on(<span class="string">'finish'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      cb(<span class="literal">null</span>, &#123;</span><br><span class="line">        path: path,</span><br><span class="line">        size: outStream.bytesWritten</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MyCustomStorage.prototype._removeFile = <span class="function"><span class="keyword">function</span> <span class="title">_removeFile</span> (<span class="params">req, file, cb</span>) </span>&#123;</span><br><span class="line">  fs.unlink(file.path, cb)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span> (<span class="params">opts</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> MyCustomStorage(opts)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="License"><a href="#License" class="headerlink" title="License"></a>License</h2><p><a href="LICENSE">MIT</a></p>
+	  
+
+	  <div>
+  		<center>
+		  <div class="pagination">
+<ul class="pagination">
+	
+	
+	
+	
+	
+		
+			
+			
+		
+	
+		
+	
+		
+	
+	
+		<li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>prev</a></li>
+	
+	<li><a href="/"><i class="fa fa-archive"></i>Home</a></li>
+	
+		<li class="next disabled"><a>next<i class="fa fa-arrow-circle-o-right"></i></a></li>
+	
+</ul>
+</div>
+
+		</center>
+	  </div>
+	  
+	</div> <!-- col-md-9/col-md-12 -->
+	
+  </div><!-- row -->
+
+	</div>
+  </div>
+  <div class="container-narrow">
+	<footer> <p>
+  &copy; 2016 Feynman
+  
+      with help from <a href="http://zespia.tw/hexo/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-wixo/">Wixo</a>.    
+</p> </footer>
+  </div> <!-- container-narrow -->
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.tableofcontents.min.js"></script>
+<script src="/js/tocgenerator.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>
